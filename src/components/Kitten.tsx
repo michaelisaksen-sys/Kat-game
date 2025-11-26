@@ -65,63 +65,65 @@ export const Kitten: React.FC<KittenProps> = ({
           transform: `scale(${scale})`,
         }}
       >
-        {/* Kitten body */}
+        {/* Black Kitten body (Jiji-style) */}
         <div className="relative w-full h-full">
-          {/* Main body (circle) */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-[#F5DEB3] to-[#DEB887] rounded-full shadow-lg">
-            {/* Fur texture */}
-            <div className="absolute inset-2 bg-gradient-to-br from-white/30 to-transparent rounded-full" />
+          {/* Main body (oval) */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-20 bg-gradient-to-b from-[#1a1a1a] to-[#000000] rounded-[50%_50%_40%_40%] shadow-xl">
+            {/* Subtle shine on fur */}
+            <div className="absolute top-2 right-3 w-3 h-4 bg-white/10 rounded-full blur-sm" />
           </div>
 
           {/* Head */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-14 bg-gradient-to-br from-[#F5DEB3] to-[#DEB887] rounded-full shadow-md z-10">
-            {/* Fur highlight */}
-            <div className="absolute inset-2 bg-gradient-to-br from-white/40 to-transparent rounded-full" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-14 bg-gradient-to-br from-[#1a1a1a] to-[#000000] rounded-full shadow-xl z-10">
+            {/* Subtle highlight */}
+            <div className="absolute top-1 left-3 w-4 h-3 bg-white/5 rounded-full blur-sm" />
 
-            {/* Ears */}
-            <div className="absolute -top-2 left-1 w-4 h-6 bg-gradient-to-br from-[#F5DEB3] to-[#DEB887] rounded-t-full transform -rotate-12" />
-            <div className="absolute -top-2 right-1 w-4 h-6 bg-gradient-to-br from-[#F5DEB3] to-[#DEB887] rounded-t-full transform rotate-12" />
-            <div className="absolute -top-1 left-2 w-2 h-4 bg-gradient-to-br from-[#FFB6C1] to-[#FF69B4] rounded-t-full transform -rotate-12" />
-            <div className="absolute -top-1 right-2 w-2 h-4 bg-gradient-to-br from-[#FFB6C1] to-[#FF69B4] rounded-t-full transform rotate-12" />
+            {/* Ears - pointed triangular */}
+            <div className="absolute -top-3 left-1.5 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[14px] border-b-[#1a1a1a] transform -rotate-12" />
+            <div className="absolute -top-3 right-1.5 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[14px] border-b-[#1a1a1a] transform rotate-12" />
 
-            {/* Eyes */}
-            <div className="absolute top-5 left-3 w-3 h-3 bg-[#2C1810] rounded-full">
-              <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full" />
+            {/* Inner ears (pink) */}
+            <div className="absolute -top-2 left-3 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[8px] border-b-[#FFB6C1] transform -rotate-12" />
+            <div className="absolute -top-2 right-3 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[8px] border-b-[#FFB6C1] transform rotate-12" />
+
+            {/* Eyes - large white with small black pupils */}
+            <div className="absolute top-4 left-2.5 w-5 h-5 bg-white rounded-full shadow-inner">
+              <div className="absolute top-1.5 left-1.5 w-2 h-2 bg-black rounded-full">
+                <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full" />
+              </div>
             </div>
-            <div className="absolute top-5 right-3 w-3 h-3 bg-[#2C1810] rounded-full">
-              <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full" />
-            </div>
-
-            {/* Nose */}
-            <div className="absolute top-8 left-1/2 -translate-x-1/2 w-2 h-1.5 bg-[#FFB6C1] rounded-full" />
-
-            {/* Mouth */}
-            <div className="absolute top-9 left-1/2 -translate-x-1/2 flex gap-1">
-              <div className="w-0.5 h-2 bg-[#2C1810] rounded transform rotate-12" />
-              <div className="w-0.5 h-2 bg-[#2C1810] rounded transform -rotate-12" />
+            <div className="absolute top-4 right-2.5 w-5 h-5 bg-white rounded-full shadow-inner">
+              <div className="absolute top-1.5 left-1.5 w-2 h-2 bg-black rounded-full">
+                <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full" />
+              </div>
             </div>
 
-            {/* Whiskers */}
+            {/* Nose - small pink */}
+            <div className="absolute top-9 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#FFB6C1] rounded-full" />
+
+            {/* Whiskers - thin white lines */}
             {[...Array(3)].map((_, i) => (
               <React.Fragment key={`whisker-${i}`}>
                 <div
-                  className="absolute left-0 w-6 h-0.5 bg-[#2C1810] opacity-30"
-                  style={{ top: `${24 + i * 2}px`, transform: `rotate(${-10 + i * 5}deg)` }}
+                  className="absolute left-0 w-7 h-[1px] bg-white/40"
+                  style={{ top: `${24 + i * 2}px`, transform: `rotate(${-15 + i * 5}deg)` }}
                 />
                 <div
-                  className="absolute right-0 w-6 h-0.5 bg-[#2C1810] opacity-30"
-                  style={{ top: `${24 + i * 2}px`, transform: `rotate(${10 - i * 5}deg)` }}
+                  className="absolute right-0 w-7 h-[1px] bg-white/40"
+                  style={{ top: `${24 + i * 2}px`, transform: `rotate(${15 - i * 5}deg)` }}
                 />
               </React.Fragment>
             ))}
           </div>
 
-          {/* Tail */}
-          <div className="absolute bottom-2 -right-4 w-12 h-3 bg-gradient-to-r from-[#F5DEB3] to-[#DEB887] rounded-full transform rotate-45 origin-left" />
+          {/* Tail - curved black tail */}
+          <div className="absolute bottom-4 -right-5 w-14 h-3 bg-gradient-to-r from-[#000000] to-[#1a1a1a] rounded-full transform rotate-45 origin-left shadow-md">
+            <div className="absolute -bottom-1 right-2 w-8 h-3 bg-gradient-to-r from-[#000000] to-[#1a1a1a] rounded-full transform rotate-20" />
+          </div>
 
-          {/* Paws */}
-          <div className="absolute bottom-0 left-2 w-4 h-3 bg-[#DEB887] rounded-full" />
-          <div className="absolute bottom-0 right-2 w-4 h-3 bg-[#DEB887] rounded-full" />
+          {/* Paws - small black paws */}
+          <div className="absolute bottom-0 left-3 w-3 h-3 bg-[#000000] rounded-full shadow-sm" />
+          <div className="absolute bottom-0 right-3 w-3 h-3 bg-[#000000] rounded-full shadow-sm" />
         </div>
 
         {/* Status indicators */}

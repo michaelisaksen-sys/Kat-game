@@ -57,9 +57,9 @@ export const TOYS: ToyItem[] = [
 
 export const ROOM_BOUNDS = {
   minX: 50,
-  maxX: 750,
-  minY: 250,
-  maxY: 550,
+  maxX: 1850,
+  minY: 80,
+  maxY: 900,
 };
 
 export const KITTEN_MOVE_SPEED = 5;

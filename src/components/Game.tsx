@@ -27,11 +27,30 @@ export const Game: React.FC = () => {
   const [keysPressed, setKeysPressed] = useState<Set<string>>(new Set());
   const gameRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number | undefined>(undefined);
+  const [roomBounds, setRoomBounds] = useState(ROOM_BOUNDS);
 
   // Save game state whenever it changes
   useEffect(() => {
     saveGameState(gameState);
   }, [gameState]);
+
+  // Update room bounds dynamically based on window size
+  useEffect(() => {
+    const updateBounds = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      setRoomBounds({
+        minX: 80,
+        maxX: width - 80,
+        minY: 100,
+        maxY: height - 120,
+      });
+    };
+
+    updateBounds();
+    window.addEventListener('resize', updateBounds);
+    return () => window.removeEventListener('resize', updateBounds);
+  }, []);
 
   // Determine kitten mood based on stats
   const getKittenMood = (): KittenMood => {
@@ -133,8 +152,8 @@ export const Game: React.FC = () => {
       const newY = prev.position.y + (dy / distance) * speed;
 
       // Clamp to room bounds
-      const clampedX = Math.max(ROOM_BOUNDS.minX, Math.min(ROOM_BOUNDS.maxX, newX));
-      const clampedY = Math.max(ROOM_BOUNDS.minY, Math.min(ROOM_BOUNDS.maxY, newY));
+      const clampedX = Math.max(roomBounds.minX, Math.min(roomBounds.maxX, newX));
+      const clampedY = Math.max(roomBounds.minY, Math.min(roomBounds.maxY, newY));
 
       // Determine direction
       let newDirection: Direction = prev.position.x < targetX ? 'right' : 'left';
@@ -233,8 +252,8 @@ export const Game: React.FC = () => {
         }
 
         // Clamp to room bounds
-        newX = Math.max(ROOM_BOUNDS.minX, Math.min(ROOM_BOUNDS.maxX, newX));
-        newY = Math.max(ROOM_BOUNDS.minY, Math.min(ROOM_BOUNDS.maxY, newY));
+        newX = Math.max(roomBounds.minX, Math.min(roomBounds.maxX, newX));
+        newY = Math.max(roomBounds.minY, Math.min(roomBounds.maxY, newY));
 
         setDirection(newDirection);
 
@@ -254,7 +273,7 @@ export const Game: React.FC = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [keysPressed, mode, direction]);
+  }, [keysPressed, mode, direction, roomBounds]);
 
   return (
     <div
